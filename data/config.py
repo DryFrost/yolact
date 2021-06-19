@@ -784,7 +784,7 @@ yolact_resnet50_plants_config = yolact_resnet50_config.copy({
     'num_classes': len(ara_plant_dataset.class_names) + 1,
 
     # Image Size
-    'max_size': 512,
+    'max_size': 480,
 })
 
 # ----------------------- YOLACT++ CONFIGS ----------------------- #
