@@ -189,6 +189,14 @@ def prep_display(dets_out, img, h, w, undo_transform=True, class_color=False, ma
     if args.display_masks and cfg.eval_mask_branch and num_dets_to_consider > 0:
         # After this, mask is of size [num_dets, h, w, 1]
         masks = masks[:num_dets_to_consider, :, :, None]
+        print('maskshape',(masks.shape))
+        for i in range(num_dets_to_consider):
+                mask = masks[i,:,:,None]
+                mask = msk.view(1,480,480,1)
+                print('newmaskshape',(mask.shape))
+                img_gpu_masked = img_gpu * (mask.sum(dim=0) >= 1).float().expand(-1,-1,3)
+                img_numpy = (img_gpu_masked * 255).byte().cpu().numpy()
+                cv2.imwrite("/content/dataset/dataset/manOUT"+str(i)+'.jpg',img_numpy)
         
         # Prepare the RGB images for each mask given their color (size [num_dets, h, w, 1])
         colors = torch.cat([get_color(j, on_gpu=img_gpu.device.index).view(1, 1, 1, 3) for j in range(num_dets_to_consider)], dim=0)
