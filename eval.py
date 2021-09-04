@@ -192,7 +192,7 @@ def prep_display(dets_out, img, h, w, undo_transform=True, class_color=False, ma
         print('maskshape',(masks.shape))
         for i in range(num_dets_to_consider):
                 mask = masks[i,:,:,None]
-                mask = msk.view(1,480,480,1)
+                mask = mask.view(1,480,480,1)
                 print('newmaskshape',(mask.shape))
                 img_gpu_masked = img_gpu * (mask.sum(dim=0) >= 1).float().expand(-1,-1,3)
                 img_numpy = (img_gpu_masked * 255).byte().cpu().numpy()
