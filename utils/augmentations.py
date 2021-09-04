@@ -5,8 +5,10 @@ import numpy as np
 import types
 from numpy import random
 from math import sqrt
+import warnings
 
 from data import cfg, MEANS, STD
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
 
 
 def intersect(box_a, box_b):
@@ -306,7 +308,7 @@ class RandomSampleCrop(object):
         height, width, _ = image.shape
         while True:
             # randomly choose a mode
-            mode = random.choice(self.sample_options,dtype=object)
+            mode = random.choice(self.sample_options)
             if mode is None:
                 return image, masks, boxes, labels
 
