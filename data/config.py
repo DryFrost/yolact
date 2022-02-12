@@ -179,7 +179,7 @@ ara_plant_dataset = dataset_base.copy({
   'train_images': '/content/dataset/dataset/Training/',
   'valid_info': '/content/dataset/dataset/valid_coco.json',
   'valid_images': '/content/dataset/dataset/valid/',
-  'class_names': ('plant'),
+  'class_names': ('PLANT'),
   'label_map': { 1:  1 }
 })
 
